@@ -12,10 +12,16 @@
 #include "f_CRC.h"
 #include <stdbool.h>
 
+
+//远程升级端口	
+#define Upgrade_PORTNUM 	"40204"
+////远程升级服务器IP
+#define Upgrade_SERVERIP 	"cn-zj-dx.sakurafrp.com"
+
 //天气连接端口号:80	
-#define Upgrade_PORTNUM 	"25052"
-//天气服务器IP
-#define Upgrade_SERVERIP 	"192.168.2.105"
+//#define Upgrade_PORTNUM 	"25052"
+////天气服务器IP
+//#define Upgrade_SERVERIP 	"192.168.2.105"
 
 u32 Crc_file;
 bool Upgrade_Flag = false;

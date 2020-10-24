@@ -46,3 +46,4 @@
 ..\obj\main.o: ..\ATK-ESP8266\Upgrade.h
 ..\obj\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 ..\obj\main.o: ..\HARDWARE\CRC32\f_CRC.h
+..\obj\main.o: ..\HARDWARE\TIMER\timer.h
