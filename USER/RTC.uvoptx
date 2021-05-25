@@ -150,18 +150,18 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>191</LineNumber>
+          <LineNumber>124</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134256294</Address>
+          <Address>134701532</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>E:\study\4銆亀ifi鍗囩骇\STM32_IAP\FLASH_APP\USER\main.c</Filename>
+          <Filename>E:\study\4銆亀ifi鍗囩骇\STM32_IAP\STM32F103_Flash_APP\HARDWARE\TIMER\timer.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\RTC\main.c\191</Expression>
+          <Expression>\\RTC\../HARDWARE/TIMER/timer.c\124</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -179,6 +179,11 @@
           <count>2</count>
           <WinNumber>1</WinNumber>
           <ItemText>write_buf2</ItemText>
+        </Ww>
+        <Ww>
+          <count>3</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>i</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>

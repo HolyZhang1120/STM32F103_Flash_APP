@@ -56,7 +56,7 @@
 	atk_8266_wifista_config();
 	printf("wifi init ok!");
 	connect_server();
-
+	Upgrade();
 	while(1)
 	{								    
 		if(t!=calendar.sec)
@@ -92,14 +92,16 @@
 			LCD_ShowNum(60,162,calendar.hour,2,16);									  
 			LCD_ShowNum(84,162,calendar.min,2,16);									  
 			LCD_ShowNum(108,162,calendar.sec,2,16);
-			LED0=!LED0;
+			
 		}	
-		delay_ms(10000);		
+		delay_ms(1000);	
+		LED0=!LED0;
 		if(up_flag)
 		{
 			Upgrade();
 			up_flag=0;
 			TIM_Cmd(TIM3, ENABLE);
+			printf("1234");
 		}
 		
 	}  

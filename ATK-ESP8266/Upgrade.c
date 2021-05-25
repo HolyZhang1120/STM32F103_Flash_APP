@@ -13,28 +13,28 @@
 #include <stdbool.h>
 
 
-//Ô¶³ÌÉı¼¶¶Ë¿Ú	
+//è¿œç¨‹å‡çº§ç«¯å£	
 #define Upgrade_PORTNUM 	"40204"
-////Ô¶³ÌÉı¼¶·şÎñÆ÷IP
+////è¿œç¨‹å‡çº§æœåŠ¡å™¨IP
 #define Upgrade_SERVERIP 	"cn-zj-dx.sakurafrp.com"
 
-//ÌìÆøÁ¬½Ó¶Ë¿ÚºÅ:80	
+//å¤©æ°”è¿æ¥ç«¯å£å·:80	
 //#define Upgrade_PORTNUM 	"25052"
-////ÌìÆø·şÎñÆ÷IP
+////å¤©æ°”æœåŠ¡å™¨IP
 //#define Upgrade_SERVERIP 	"192.168.2.105"
 
 u32 Crc_file;
 bool Upgrade_Flag = false;
 
-//Á¬½Ó·şÎñÆ÷
+//è¿æ¥æœåŠ¡å™¨
 u8 connect_server(void)
 {
 	u8 *p;
 	u8 res;
-//	u8 ipbuf[16]; 	//IP»º´æ
-	p=mymalloc(SRAMIN,40);							//ÉêÇë40×Ö½ÚÄÚ´æ
-	sprintf((char*)p,"AT+CIPSTART=\"TCP\",\"%s\",%s",Upgrade_SERVERIP,Upgrade_PORTNUM);    //ÅäÖÃÄ¿±êTCP·şÎñÆ÷
-	res = atk_8266_send_cmd(p,"OK",500);//Á¬½Óµ½Ä¿±êTCP·şÎñÆ÷
+//	u8 ipbuf[16]; 	//IPç¼“å­˜
+	p=mymalloc(SRAMIN,40);							//ç”³è¯·40å­—èŠ‚å†…å­˜
+	sprintf((char*)p,"AT+CIPSTART=\"TCP\",\"%s\",%s",Upgrade_SERVERIP,Upgrade_PORTNUM);    //é…ç½®ç›®æ ‡TCPæœåŠ¡å™¨
+	res = atk_8266_send_cmd(p,"OK",500);//è¿æ¥åˆ°ç›®æ ‡TCPæœåŠ¡å™¨
 	if(res==1)
 	{
 		printf("disconnect server \r\n");
@@ -52,16 +52,16 @@ u8 connect_server(void)
 u8 send_server(u8 *buffer)
 {
 	u16 i=0,j=0;
-	atk_8266_send_cmd("AT+CIPMODE=1","OK",100);      //´«ÊäÄ£Ê½Îª£ºÍ¸´«	
-//	atk_8266_get_wanip(ipbuf);//»ñÈ¡WAN IP
+	atk_8266_send_cmd("AT+CIPMODE=1","OK",100);      //ä¼ è¾“æ¨¡å¼ä¸ºï¼šé€ä¼ 	
+//	atk_8266_get_wanip(ipbuf);//è·å–WAN IP
 	
 	USART3_RX_STA=0;
-	atk_8266_send_cmd("AT+CIPSEND","OK",100);         //¿ªÊ¼Í¸´«
+	atk_8266_send_cmd("AT+CIPSEND","OK",100);         //å¼€å§‹é€ä¼ 
 	delay_ms(10);
 	printf("start trans...\r\n");
-	USART3_RX_STA=0;	//ÇåÁã´®¿Ú3Êı¾İ
+	USART3_RX_STA=0;	//æ¸…é›¶ä¸²å£3æ•°æ®
 	Usart_SendString(USART3,(u8 *)buffer,7);
-//	delay_ms(10);//ÑÓÊ±20ms·µ»ØµÄÊÇÖ¸Áî·¢ËÍ³É¹¦µÄ×´Ì¬
+//	delay_ms(10);//å»¶æ—¶20msè¿”å›çš„æ˜¯æŒ‡ä»¤å‘é€æˆåŠŸçš„çŠ¶æ€
 //	atk_8266_at_response(1);
 	delay_ms(1000);
 //	printf("1\r\n");
@@ -74,16 +74,16 @@ u8 send_server(u8 *buffer)
 				j++;
 		if(j==800)
 			return 1;
-	}while(!(USART3_RX_STA&0X8000));		//µÈ´ıÊ±¼äµ½´ï  
-	USART3_RX_STA=0;	//ÇåÁã´®¿Ú3Êı¾İ
+	}while(!(USART3_RX_STA&0X8000));		//ç­‰å¾…æ—¶é—´åˆ°è¾¾  
+	USART3_RX_STA=0;	//æ¸…é›¶ä¸²å£3æ•°æ®
 	printf("it is OK\r\n");
-//	IWDG_Feed();//Î¹¹·
-//	printf("p1£º%s\r\n",RX_buf);
+//	IWDG_Feed();//å–‚ç‹—
+//	printf("p1ï¼š%s\r\n",RX_buf);
 	return 0;
 }
 
 
-//ÇëÇóÉı¼¶
+//è¯·æ±‚å‡çº§
 u32 Get_Upgrade_size(void)
 {
 	u32 size;
@@ -111,7 +111,7 @@ u32 Get_Upgrade_size(void)
 	else return NULL;
 }
 
-//ÇëÇó°üÊı
+//è¯·æ±‚åŒ…æ•°
 void *Get_Upgrade_package(u8 package,u16 size_num)
 {
 	u32 size;
@@ -122,10 +122,10 @@ void *Get_Upgrade_package(u8 package,u16 size_num)
 	delay_ms(50);
 	while(send_server((u8 *)crc32_send((u8 *)buffer_send,3)))
 		return NULL;
-	printf("pack£º%d\r\n",USART3_RX_BUF1[2]);
+	printf("packï¼š%d\r\n",USART3_RX_BUF1[2]);
 //	if(USART3_RX_BUF1[2]==0x10)
 //	{for(kl=0;kl<size_num;kl++)
-//		printf("USART3_RX_BUF1[%d]£º%x\r\n",kl,USART3_RX_BUF1[kl]);
+//		printf("USART3_RX_BUF1[%d]ï¼š%x\r\n",kl,USART3_RX_BUF1[kl]);
 //	}
 	if(USART3_RX_BUF1[0]==0xAA)
 	{
@@ -150,32 +150,32 @@ void Upgrade(void)
 {
 	u32 crc32_file,Size;
 	u16 size_num,j;	
-	u8 pack,i,k,*write_buf1,*write_buf,write_buf2[4] = {0};	
+	u8 pack,i,k=0,*write_buf1,*write_buf,write_buf2[4] = {0};	
   bool Upgrade_Flag_net = true;
 	
 	if(Upgrade_Flag_net == true)
 	{	
 		Size = Get_Upgrade_size();
-		printf("Crc_fileÎª0x:%x\n", Crc_file);
-		printf("SizeÎª0x:%d\n", Size);
-		atk_8266_quit_trans();//ÍË³öÍ¸´«
-	//		atk_8266_send_cmd("AT+CIPCLOSE","OK",50);         //¹Ø±ÕÁ¬½Ó
+		printf("Crc_fileä¸º0x:%x\n", Crc_file);
+		printf("Sizeä¸º0x:%d\n", Size);
+		atk_8266_quit_trans();//é€€å‡ºé€ä¼ 
+	//		atk_8266_send_cmd("AT+CIPCLOSE","OK",50);         //å…³é—­è¿æ¥
 		while(Size == NULL)
 		{
-			atk_8266_quit_trans();//ÍË³öÍ¸´«
-			atk_8266_send_cmd("AT+CIPCLOSE","OK",50);         //¹Ø±ÕÁ¬½Ó
+			atk_8266_quit_trans();//é€€å‡ºé€ä¼ 
+			atk_8266_send_cmd("AT+CIPCLOSE","OK",50);         //å…³é—­è¿æ¥
 			delay_ms(1000);
 			connect_server();
 			Size = Get_Upgrade_size();
 			k++;
-			if(k==10)
+			if(k==3)
 			{
 				k = 0;
 				printf("Get Size err\r\n");
 				break;
 			}
 		}
-		printf("Size£º%d\r\n",Size);
+		printf("Sizeï¼š%d\r\n",Size);
 	}
 	if(Upgrade_Flag==true)
 	{
@@ -186,21 +186,21 @@ void Upgrade(void)
 		if(Size%BATA_SIZE != 0) 
 			pack = Size/BATA_SIZE + 1;
 		else pack = Size/BATA_SIZE;
-			printf("pack£º%d\r\n",pack);
+			printf("packï¼š%d\r\n",pack);
 		for(i=1;i<(pack+1);i++)
 		{
-//				IWDG_Feed();//Î¹¹·
+//				IWDG_Feed();//å–‚ç‹—
 			if(i == pack)
 				size_num = Size - (BATA_SIZE*(i-1)) + 11;
 			else size_num = BATA_SIZE+11;
-			printf("size_num£º%d\r\n",size_num);
+			printf("size_numï¼š%d\r\n",size_num);
 			write_buf1 = Get_Upgrade_package(i,size_num);
-			atk_8266_quit_trans();//ÍË³öÍ¸´«
-//				atk_8266_send_cmd("AT+CIPCLOSE","OK",50);         //¹Ø±ÕÁ¬½Ó
+			atk_8266_quit_trans();//é€€å‡ºé€ä¼ 
+//				atk_8266_send_cmd("AT+CIPCLOSE","OK",50);         //å…³é—­è¿æ¥
 			while(write_buf1 == NULL)
 			{
-				atk_8266_quit_trans();//ÍË³öÍ¸´«
-				atk_8266_send_cmd("AT+CIPCLOSE","OK",50);         //¹Ø±ÕÁ¬½Ó
+				atk_8266_quit_trans();//é€€å‡ºé€ä¼ 
+				atk_8266_send_cmd("AT+CIPCLOSE","OK",50);         //å…³é—­è¿æ¥
 				delay_ms(1000);
 				printf("NULL\r\n");
 				connect_server();
@@ -231,7 +231,7 @@ void Upgrade(void)
 				else crc32_file = CRC32Software_((u8 *)write_buf,(size_num-11),(uint32_t)crc32_file);
 			}				
 			delay_ms(100);	
-			printf("crc32_fileÎª0x:%x\n", crc32_file);	 
+			printf("crc32_fileä¸º0x:%x\n", crc32_file);	 
 			printf("11\n");
 		}
 		printf("22\n");
@@ -239,9 +239,9 @@ void Upgrade(void)
 		myfree(SRAMIN,write_buf);
 		myfree(SRAMIN,write_buf1);
 		
-		if((crc32_file == Crc_file)&&(Size != NULL))//ÅĞ¶ÏÎÄ¼şCRC32
+		if((crc32_file == Crc_file)&&(Size != NULL))//åˆ¤æ–­æ–‡ä»¶CRC32
 		{	
-			printf("¹Ì¼şÕıÈ·\r\n");
+			printf("å›ºä»¶æ­£ç¡®\r\n");
 			Crc_file = 0;
 			Upgrade_Flag = false;
 			Upgrade_Flag_net = false;
@@ -250,15 +250,15 @@ void Upgrade(void)
 			write_buf2[2] = Size >> 8;
 			write_buf2[3] = Size;
 			W25QXX_Write((u8*)write_buf2,Flash_ADDR,4);
-			SoftReset();   //¸´Î»
+			SoftReset();   //å¤ä½
 		}
 	}
 }
 
 void SoftReset(void)
 {
-    __set_FAULTMASK(1); // ¹Ø±ÕËùÓĞÖĞ¶Ï
-    NVIC_SystemReset(); // ¸´Î»
+    __set_FAULTMASK(1); // å…³é—­æ‰€æœ‰ä¸­æ–­
+    NVIC_SystemReset(); // å¤ä½
 }
 
 
